@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.barkepedia.R
 import com.example.barkepedia.model.DogBreed
+import com.example.barkepedia.network.NetworkHelper
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 
@@ -61,11 +62,7 @@ class DogBreedDetailActivity : AppCompatActivity() {
                 chipGroupTemperament.addView(chip)
             }
 
-            val imageUrl = "https://cdn2.thedogapi.com/images/${it.referenceImageId}.jpg"
-            Glide.with(this)
-                .load(imageUrl)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageViewDog)
+            NetworkHelper.loadDogImage(this, dog.referenceImageId, imageViewDog)
         }
     }
 
