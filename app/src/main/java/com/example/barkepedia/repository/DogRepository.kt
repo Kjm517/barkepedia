@@ -6,7 +6,6 @@ import com.example.barkepedia.database.DogBreedDao
 import com.example.barkepedia.database.toEntity
 import com.example.barkepedia.model.DogBreed
 
-// DogRepository.kt
 class DogRepository(
     private val apiService: ApiService,
     private val dogBreedDao: DogBreedDao
