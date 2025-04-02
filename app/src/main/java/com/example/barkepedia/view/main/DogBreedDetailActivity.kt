@@ -22,7 +22,6 @@ class DogBreedDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        // Get UI elements using findViewById
         val imageViewDog = findViewById<ImageView>(R.id.imageViewDog)
         val textViewDogName = findViewById<TextView>(R.id.textViewDogName)
         val textViewBreedGroup = findViewById<TextView>(R.id.textViewBreedGroup)
@@ -62,7 +61,7 @@ class DogBreedDetailActivity : AppCompatActivity() {
                 chipGroupTemperament.addView(chip)
             }
 
-            NetworkHelper.loadDogImage(this, dog.referenceImageId, imageViewDog)
+            NetworkHelper.loadDogImage(this, dog.referenceImageId, imageViewDog, R.drawable.ic_launcher_background)
         }
     }
 

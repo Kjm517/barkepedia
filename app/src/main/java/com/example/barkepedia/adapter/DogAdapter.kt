@@ -7,11 +7,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.barkepedia.R
 import com.example.barkepedia.model.DogBreed
 import com.example.barkepedia.network.NetworkHelper
@@ -39,8 +34,8 @@ class DogAdapter(
         holder.dogName.text = dog.name
         holder.breedGroup.text = dog.breedGroup ?: "Unknown"
         holder.imageProgress.visibility = View.VISIBLE
-
-        NetworkHelper.loadDogImage(holder.itemView, dog.referenceImageId, holder.dogImage, holder.imageProgress)
+        NetworkHelper.loadDogImageWithProgressBar(holder.itemView.context, dog.referenceImageId, holder.dogImage, holder.imageProgress)
+        NetworkHelper.loadDogImage(holder.itemView.context, dog.referenceImageId, holder.dogImage, R.drawable.ic_launcher_background)
 
         holder.itemView.setOnClickListener {
             onItemClick(dog)

@@ -9,22 +9,31 @@ import com.example.barkepedia.model.DogBreed
 import com.example.barkepedia.repository.DogRepository
 import kotlinx.coroutines.launch
 
+// MainViewModel.kt
 class MainViewModel(private val repository: DogRepository) : ViewModel() {
-
     private val _dogs = MutableLiveData<List<DogBreed>>()
     val dogs: LiveData<List<DogBreed>> get() = _dogs
 
-    fun fetchDogs() {
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
+
+    fun fetchDogs(forceRefresh: Boolean = false) {
         viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+
             try {
-                val response = repository.getDogs()
-                _dogs.value = response
-                Log.d("FETCH_DOGS", "Success: ${response.size} dogs fetched")
+                val dogList = repository.getDogs(forceRefresh)
+                _dogs.value = dogList
             } catch (e: Exception) {
-                Log.e("FETCH_DOGS", "Error fetching dogs", e)
+                _error.value = "Failed to load dogs: ${e.message}"
+            } finally {
+                _isLoading.value = false
             }
         }
     }
-
 }
 
